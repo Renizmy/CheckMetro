@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_lines">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.checkmetro.ui.fragments.ScanFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_navigation_search_to_stationDetailsFragment"
+            app:destination="@id/stationDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_lines"
+        android:name="com.example.checkmetro.ui.fragments.LineFragment"
+        android:label="@string/title_lines"
+        tools:layout="@layout/fragment_line">
+        <action
+            android:id="@+id/action_navigation_lines_to_stationFragment"
+            app:destination="@id/stationFragment" />
+        <action
+            android:id="@+id/action_navigation_lines_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.example.checkmetro.ui.fragments.FavoritesFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_stationDetailsFragment"
+            app:destination="@id/stationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stationFragment"
+        android:name="com.example.checkmetro.ui.fragments.StationFragment"
+        android:label="Stations"
+        tools:layout="@layout/fragment_station">
+        <argument
+            android:name="line_code"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_stationFragment_to_stationDetailsFragment"
+            app:destination="@id/stationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stationDetailsFragment"
+        android:name="com.example.checkmetro.ui.fragments.StationDetailsFragment"
+        android:label="Station"
+        tools:layout="@layout/fragment_station_details">
+        <argument
+            android:name="station_slug"
+            app:argType="string" />
+        <argument
+            android:name="line_code"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_stationDetailsFragment_self"
+            app:destination="@id/stationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.checkmetro.ui.fragments.MapFragment"
+        android:label="Carte"
+        tools:layout="@layout/fragment_map" />
+
+</navigation>
