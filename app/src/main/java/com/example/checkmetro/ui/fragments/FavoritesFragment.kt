@@ -1,10 +1,9 @@
 package com.example.checkmetro.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.checkmetro.R
@@ -21,6 +20,26 @@ class FavoritesFragment : Fragment() {
     private lateinit var linkLineStationDao: LinkLineStationDao
     private var linksLineIc: MutableList<String> = arrayListOf()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.line_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.action_map -> {
+                  val target=FavoritesFragmentDirections.actionNavigationFavoritesToMapFragment()
+                     Navigation.findNavController(requireView()).navigate(target)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,

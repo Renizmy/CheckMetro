@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_navigation_favorites_to_stationDetailsFragment"
             app:destination="@id/stationDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_favorites_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/stationFragment"

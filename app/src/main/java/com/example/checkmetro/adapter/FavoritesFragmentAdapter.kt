@@ -44,6 +44,7 @@ class FavoritesFragmentAdapter (val stations:List<StationsLine>) : RecyclerView.
        holder.favoriteview.rv_ic_lines.setOnClickListener {
            val action= FavoritesFragmentDirections.actionNavigationFavoritesToStationDetailsFragment(station.slug,station.line)
            Navigation.findNavController(holder.favoriteview).navigate(action)
+
        }
     }
 }
