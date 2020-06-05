@@ -73,4 +73,10 @@ class CheckOutActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
 }

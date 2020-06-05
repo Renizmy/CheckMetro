@@ -58,6 +58,9 @@ class ScanFragment : Fragment() {
                     "Scan failed", //Insert Product in database
                     Toast.LENGTH_SHORT
                 ).show()
+                val target=ScanFragmentDirections.actionNavigationSearchToNavigationLines()
+                Navigation.findNavController(requireView()).navigate(target)
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

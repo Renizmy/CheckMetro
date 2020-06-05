@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_search_to_stationDetailsFragment"
             app:destination="@id/stationDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_lines"
+            app:destination="@id/navigation_lines" />
     </fragment>
 
     <fragment

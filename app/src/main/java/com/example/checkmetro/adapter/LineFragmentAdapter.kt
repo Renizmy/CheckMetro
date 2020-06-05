@@ -1,6 +1,5 @@
 package com.example.checkmetro.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,25 @@ class LineFragmentAdapter(val lines: List<LineTraffic>) : RecyclerView.Adapter<L
 
     class LineViewHolder(val lineview: View) : RecyclerView.ViewHolder(lineview)
 
+  /*  fun filter(text: String) {
+        var text = text
+        lines.
+            //https://stackoverflow.com/questions/30398247/how-to-filter-a-recyclerview-with-a-searchview/30429439#30429439
+        if (text.isEmpty()) {
+            lines.addAll(itemsCopy)
+        } else {
+            text = text.toLowerCase()
+            for (item in itemsCopy) {
+                if (item.name.toLowerCase().contains(text) || item.phone.toLowerCase()
+                        .contains(text)
+                ) {
+                    lines.add(item)
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
+     */
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -49,4 +67,5 @@ class LineFragmentAdapter(val lines: List<LineTraffic>) : RecyclerView.Adapter<L
 
 
    }
+
 }
