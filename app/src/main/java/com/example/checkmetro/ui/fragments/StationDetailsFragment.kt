@@ -1,13 +1,11 @@
 package com.example.checkmetro.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Switch
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.checkmetro.R
@@ -21,6 +19,7 @@ import com.example.checkmetro.model.StationFavorites
 import com.example.checkmetro.service.APIRATP
 import com.example.checkmetro.utils.dao
 import com.example.checkmetro.utils.retrofit
+import kotlinx.android.synthetic.main.fragment_station_details.view.*
 import kotlinx.coroutines.runBlocking
 
 class StationDetailsFragment : Fragment() {
@@ -150,18 +149,35 @@ class StationDetailsFragment : Fragment() {
                 Toast.makeText(this.requireContext(), "hide", Toast.LENGTH_SHORT).show()
                 recyclerView.adapter?.notifyDataSetChanged()
                 recyclerView.adapter = StationDetailsFragmentAdapter(schedule)
+
             }
 
         }
 
         getScheduleOfStation()
         recyclerView.adapter = StationDetailsFragmentAdapter(schedule)
+
+        root.refresh_layout.setOnRefreshListener{
+            if(root.switch_horraire.isChecked){
+                getAllScheduleOfStation()
+                recyclerView.adapter = StationDetailsFragmentAdapter(schedule)
+                recyclerView.adapter?.notifyDataSetChanged()
+
+                root.refresh_layout.isRefreshing=false
+                 }else{
+                getScheduleOfStation()
+                recyclerView.adapter = StationDetailsFragmentAdapter(schedule)
+                recyclerView.adapter?.notifyDataSetChanged()
+
+                root.refresh_layout.isRefreshing=false
+            }
+
+        }
         return root
     }
 
 
     private fun getScheduleOfStation() {
-
         schedule = arrayListOf()
         runBlocking {
             val mess: MutableList<String> = arrayListOf()
@@ -209,7 +225,5 @@ class StationDetailsFragment : Fragment() {
             }
         }
     }
-
-
 }
 
