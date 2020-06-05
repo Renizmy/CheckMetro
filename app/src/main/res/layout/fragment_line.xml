@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.LineFragment">
 
-<LinearLayout
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="4dp"
+    app:cardCornerRadius="20dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lines_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</LinearLayout>
+</androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
