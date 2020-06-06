@@ -55,7 +55,7 @@ class LineFragment : Fragment() {
             adapterStation.notifyDataSetChanged()
             false
         }
-        
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 updateData()

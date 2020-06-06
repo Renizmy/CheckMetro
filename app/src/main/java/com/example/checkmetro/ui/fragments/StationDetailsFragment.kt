@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -172,7 +173,9 @@ class StationDetailsFragment : Fragment() {
                 root.refresh_layout.isRefreshing=false
             }
 
+
         }
+        (activity as AppCompatActivity).supportActionBar!!.title = station.name
         return root
     }
 
