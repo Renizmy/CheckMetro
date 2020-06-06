@@ -2,6 +2,7 @@ package com.example.checkmetro.ui.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.util.Log
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -37,6 +38,7 @@ class LineFragment : Fragment() {
 
     private lateinit var lineStationList: MutableList<StationsLine>
     private lateinit var lineStationListCopy: MutableList<StationsLine>
+    private lateinit var mergeAdapter: MergeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -53,7 +55,7 @@ class LineFragment : Fragment() {
             adapterStation.notifyDataSetChanged()
             false
         }
-
+        
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 updateData()
@@ -109,7 +111,7 @@ class LineFragment : Fragment() {
         adapter = LineFragmentAdapter(lineTrafficList)
         adapterStation= LineStationFragmentAdapter(lineStationList)
 
-       val mergeAdapter=MergeAdapter(adapter,adapterStation)
+        mergeAdapter=MergeAdapter(adapter,adapterStation)
 
         recyclerView.adapter = mergeAdapter
 
@@ -166,13 +168,6 @@ class LineFragment : Fragment() {
         lineStationList.clear()
         lineStationList.addAll(lineStationListCopy)
 
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        lineStationList.clear()
-        adapterStation.notifyDataSetChanged()
-        //Log.d("onResume","onresule")
+        mergeAdapter.notifyDataSetChanged()
     }
 }
