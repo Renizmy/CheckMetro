@@ -30,8 +30,6 @@ class CheckOutActivity : AppCompatActivity() {
 
         val reset = pref.getBoolean("reset", true);
 
-        Log.d("launcher",reset.toString())
-
         if (reset) {
 
             val linkLineDao =dao().getLinkLineStationDao()
@@ -47,7 +45,7 @@ class CheckOutActivity : AppCompatActivity() {
 
                 val resultLine = service.getLines()
                 resultLine.result.metros.map { it ->
-                    val line = Line(0, it.code, it.name, it.directions, it.id)
+                    val line = Line(0, it.code, it.name, it.directions, it.id )
                     lineDao.addLine(line)
 
                     val resultStations = service.getStations(it.code)

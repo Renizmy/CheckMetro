@@ -1,9 +1,11 @@
 package com.example.checkmetro.ui.fragments
 
 import android.os.Bundle
-import android.view.*
 import android.util.Log
+import android.view.*
 import android.widget.SearchView
+import androidx.core.view.isEmpty
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +42,9 @@ class LineFragment : Fragment() {
     private lateinit var lineStationListCopy: MutableList<StationsLine>
     private lateinit var mergeAdapter: MergeAdapter
 
+    private lateinit var searchView: SearchView
+    private lateinit var searchItem:MenuItem
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
@@ -48,8 +53,9 @@ class LineFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.line_menu, menu)
 
-        val searchItem = menu.findItem(R.id.action_bar_search)
-        val searchView: SearchView = searchItem.actionView as SearchView
+        searchItem = menu.findItem(R.id.action_bar_search)
+        searchView = searchItem.actionView as SearchView
+
         searchView.setOnCloseListener {
             lineStationList.clear()
             adapterStation.notifyDataSetChanged()
@@ -65,9 +71,11 @@ class LineFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                if(newText!=""){ // Sinon les champs étaient initialisés lors d'un OnResume du fragment.
                 updateData()
                 adapter.filter(newText)
                 adapterStation.filter(newText)
+                }
                 return true
             }
         })
@@ -99,24 +107,25 @@ class LineFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_line, container, false)
         recyclerView = root.findViewById(R.id.lines_recyclerview)
-        recyclerView.layoutManager =   LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
         lineTrafficList = arrayListOf()
         getAllLines()
 
         lineTrafficListCopy = arrayListOf()
         lineTrafficListCopy.addAll(lineTrafficList)
 
-        lineStationList= arrayListOf()
+        lineStationList = arrayListOf()
 
         adapter = LineFragmentAdapter(lineTrafficList)
-        adapterStation= LineStationFragmentAdapter(lineStationList)
+        adapterStation = LineStationFragmentAdapter(lineStationList)
 
-        mergeAdapter=MergeAdapter(adapter,adapterStation)
+        mergeAdapter = MergeAdapter(adapter, adapterStation)
 
         recyclerView.adapter = mergeAdapter
 
         getAllStations()
-        lineStationListCopy= arrayListOf()
+        lineStationListCopy = arrayListOf()
         lineStationListCopy.addAll(lineStationList)
 
         return root
@@ -126,7 +135,7 @@ class LineFragment : Fragment() {
         runBlocking {
             lineStationList.clear()
             val stations = stationDao.getStations()
-           val liste= stations.distinctBy { it.slug }
+            val liste = stations.distinctBy { it.slug }
             var listlink = mutableListOf<String>()
             liste.map {
                 listlink = arrayListOf()
@@ -170,4 +179,5 @@ class LineFragment : Fragment() {
 
         mergeAdapter.notifyDataSetChanged()
     }
+
 }
