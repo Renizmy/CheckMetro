@@ -10,8 +10,7 @@ import kotlinx.android.parcel.Parcelize
 data class Station(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
-    val slug: String,
-    val favorite:Boolean
+    val slug: String
 ) : Parcelable
 
 

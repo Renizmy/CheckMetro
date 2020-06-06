@@ -28,9 +28,4 @@ interface StationDao {
     @Query("SELECT * from station where slug=:slugStation")
     suspend fun getStationWithSlug(slugStation: String): Station
 
-
-    @Query("UPDATE station Set favorite=:fav WHERE slug=:slugStation ")
-    suspend fun UpdateStationFavorite(fav:Boolean,slugStation: String)
-
-
 }

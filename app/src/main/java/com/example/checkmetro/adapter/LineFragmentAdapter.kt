@@ -1,5 +1,6 @@
 package com.example.checkmetro.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,33 +13,34 @@ import com.example.checkmetro.ui.fragments.LineFragmentDirections
 import kotlinx.android.synthetic.main.line_view.view.*
 
 
-class LineFragmentAdapter(val lines: List<LineTraffic>) : RecyclerView.Adapter<LineFragmentAdapter.LineViewHolder>() {
+class LineFragmentAdapter(val lines: MutableList<LineTraffic>) : RecyclerView.Adapter<LineFragmentAdapter.LineViewHolder>() {
+    private lateinit var  linesCopy : MutableList<LineTraffic>
 
     class LineViewHolder(val lineview: View) : RecyclerView.ViewHolder(lineview)
 
-  /*  fun filter(text: String) {
-        var text = text
-        lines.
-            //https://stackoverflow.com/questions/30398247/how-to-filter-a-recyclerview-with-a-searchview/30429439#30429439
+    fun filter(text: String) {
+        linesCopy= arrayListOf()
+        linesCopy.addAll(lines)
+        lines.clear()
         if (text.isEmpty()) {
-            lines.addAll(itemsCopy)
+            lines.addAll(linesCopy)
         } else {
-            text = text.toLowerCase()
-            for (item in itemsCopy) {
-                if (item.name.toLowerCase().contains(text) || item.phone.toLowerCase()
-                        .contains(text)
-                ) {
+
+            for (item in linesCopy) {
+                val a=item.name.replace("é","e").toLowerCase()
+                val b=text.replace("é","e").toLowerCase()
+                if (a.contains(b)) {
                     lines.add(item)
                 }
             }
         }
         notifyDataSetChanged()
     }
-     */
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.line_view, parent, false)
+
         return LineViewHolder(view)
     }
 

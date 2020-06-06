@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_navigation_lines_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_navigation_lines_to_stationDetailsFragment"
+            app:destination="@id/stationDetailsFragment" />
     </fragment>
 
     <fragment

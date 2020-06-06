@@ -52,8 +52,7 @@ class CheckOutActivity : AppCompatActivity() {
 
                     val resultStations = service.getStations(it.code)
                     resultStations.result.stations.map { it2 ->
-
-                        val station = Station(0, it2.name, it2.slug, false)
+                        val station = Station(0, it2.name, it2.slug)
                         stationDao.addStation(station)
 
                         val link = LinkLineStation(0, it.code, it2.slug)

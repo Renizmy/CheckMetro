@@ -28,6 +28,7 @@ class LineIcFragmentAdapter(val ic:List<String>): RecyclerView.Adapter<LineIcFra
 
         val uri="ic_m"+ic.toLowerCase()+"genrvb"
         val id=holder.ic_line_view.context.resources.getIdentifier(uri,"drawable",holder.ic_line_view.context.packageName)
+
         Glide.with(holder.ic_line_view).load(id).centerCrop().placeholder(R.drawable.ic_error_outline).into(holder.ic_line_view.iv_ic_line)
 
         holder.ic_line_view.setOnClickListener { v ->

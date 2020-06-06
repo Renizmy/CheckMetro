@@ -49,9 +49,9 @@ fun AppCompatActivity.retrofit(baseURL : String) : Retrofit {
 }
 
 fun AppCompatActivity.dao():AppDatabase{
-    return Room.databaseBuilder(this, AppDatabase::class.java, "CheckMetro").build()
+    return Room.databaseBuilder(this, AppDatabase::class.java, "CheckMetro").fallbackToDestructiveMigration().build()
 }
 
 fun Fragment.dao():AppDatabase{
-    return Room.databaseBuilder(this.requireContext(), AppDatabase::class.java, "CheckMetro").build()
+    return Room.databaseBuilder(this.requireContext(), AppDatabase::class.java, "CheckMetro").fallbackToDestructiveMigration().build()
 }
